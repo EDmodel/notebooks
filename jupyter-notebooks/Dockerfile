@@ -1,0 +1,25 @@
+FROM edmodel/ed2:gnu-PR-357 as edmodel
+
+FROM jupyter/base-notebook:latest
+USER root
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+       libhdf5-openmpi-103 \
+       libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the ed2 binary from the edmodel stage
+COPY --from=edmodel /usr/bin/ed2 /usr/bin/ed2
+
+USER jovyan
+
+RUN pip install ipywidgets
+RUN pip install paramiko
+RUN pip install PyDrive
+
+
+# Copy all .ipynb files from the current directory to /home/jovyan/ED
+COPY *.ipynb /home/jovyan/
+COPY ed-demo/ /home/jovyan/data/
+#chmod 777 /home/jovyan/data
