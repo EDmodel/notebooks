@@ -20,6 +20,7 @@ RUN pip install PyDrive
 
 
 # Copy all .ipynb files from the current directory to /home/jovyan/ED
-COPY *.ipynb /home/jovyan/
-COPY ed-demo/ /home/jovyan/data/
+COPY --chown=jovyan:users *.ipynb /home/jovyan/
+COPY --chown=jovyan:users ed-demo/ /home/jovyan/data/
+RUN mkdir -p /home/jovyan/data/test-outputs/{tonzi,tonzi.harvest,umbs.bg}
 #chmod 777 /home/jovyan/data
