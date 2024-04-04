@@ -7,6 +7,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        libhdf5-openmpi-103 \
        libgomp1 \
+       unzip \
+       vim \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the ed2 binary from the edmodel stage
