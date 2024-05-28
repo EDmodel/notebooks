@@ -18,7 +18,6 @@ USER jovyan
 
 RUN pip install ipywidgets
 RUN pip install paramiko
-RUN pip install PyDrive
 
 
 # Copy all .ipynb files from the current directory to /home/jovyan/ED
